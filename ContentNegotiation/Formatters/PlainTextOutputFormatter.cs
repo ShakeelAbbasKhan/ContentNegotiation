@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ContentNegotiation.Helpers;
 using ContentNegotiation.Models;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
@@ -26,26 +27,24 @@ namespace ContentNegotiationDemo.Formatters
         context, Encoding selectedEncoding)
         {
             var response = context.HttpContext.Response;
-            var buffer = new StringBuilder();
-            if (context.Object is IEnumerable<Student>)
+            var data = context.Object as IEnumerable<Student>;
+
+            if (data == null)
+                return;
+
+            using (var buffer = new MemoryStream())
+            using (var writer = new StreamWriter(buffer, selectedEncoding))
             {
-                foreach (var company in (IEnumerable<Student>)context.Object)
-                {
-                    FormatCsv(buffer, company);
-                }
+                var plainTextTable = data.ToPlainTextTable();
+
+                writer.WriteLine(plainTextTable);
+
+                writer.Flush();
+
+                buffer.Position = 0;
+                await buffer.CopyToAsync(response.Body);
             }
-            else
-            {
-                FormatCsv(buffer, (Student)context.Object);
-            }
-            await response.WriteAsync(buffer.ToString());
-        }
-        private static void FormatCsv(StringBuilder buffer, Student student)
-        {
-            buffer.AppendLine($"Id: {student.Id}");
-            buffer.AppendLine($"FirstName: {student.FirstName}");
-            buffer.AppendLine($"LastName: {student.LastName}");
-            buffer.AppendLine();
+
         }
     }
 }
