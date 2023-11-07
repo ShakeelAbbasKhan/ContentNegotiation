@@ -9,12 +9,10 @@ namespace ContentNegotiation.Controllers
 
         public StudentController()
         {
-            // Initialize the list of students
             students = new List<Student>
             {
                 new Student { Id = 1, FirstName = "Shakeel", LastName = "Abbas" },
                 new Student { Id = 2, FirstName = "Bilal", LastName = "Asghar" },
-                // Add more students as needed
             };
         }
         public IActionResult Index()
