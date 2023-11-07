@@ -21,6 +21,7 @@ namespace ContentNegotiation.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(Duration = 60, VaryByHeader = "Accept")]
         public IActionResult GetStudentsData()
         {
             return Ok(students);
