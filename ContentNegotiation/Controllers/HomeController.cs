@@ -20,7 +20,6 @@ namespace ContentNegotiation.Controllers
                 return PartialView("_PartialView");
             }
 
-            // Handle non-AJAX request (return a full view)
             return View();
         }
 

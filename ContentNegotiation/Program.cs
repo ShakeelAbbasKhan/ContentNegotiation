@@ -15,7 +15,6 @@ namespace ContentNegotiation
                 options.RespectBrowserAcceptHeader = true;
                 options.ReturnHttpNotAcceptable = true;
 
-                // Add custom media type formatter for CSV format
                 options.OutputFormatters.Add(new HtmlOutputFormatter());
                 options.OutputFormatters.Add(new PlainTextOutputFormatter());
             })

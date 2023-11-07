@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="ajaxButton">Make AJAX Request</button>
+
+    <div id="resultContainer">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#ajaxButton').click(function() {
+                $.ajax({
+                    url: '/Student/GetStudents',
+                    type: 'GET',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    success: function(data) {
+                        $('#resultContainer').html(data); 
+                    },
+                    error: function() {
+                        $('#resultContainer').html('An error occurred.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

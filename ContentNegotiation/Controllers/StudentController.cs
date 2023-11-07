@@ -21,9 +21,28 @@ namespace ContentNegotiation.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetStudents()
+        public IActionResult GetStudentsData()
         {
             return Ok(students);
         }
+
+        [HttpGet]
+        public IActionResult GetStudents()
+        {
+            var isAjaxRequest = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+
+            if (isAjaxRequest)
+            {
+                return PartialView("_GetStudents", students);
+                //_GetStudents   _PartialView
+            }
+            else
+            {
+                return View(students);
+            }
+
+            return Ok(students);
+        }
+
     }
 }
