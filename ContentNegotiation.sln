@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentNegotiation", "ContentNegotiation\ContentNegotiation.csproj", "{5821AB9F-24EA-4410-9F90-38643D4C0188}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5821AB9F-24EA-4410-9F90-38643D4C0188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5821AB9F-24EA-4410-9F90-38643D4C0188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5821AB9F-24EA-4410-9F90-38643D4C0188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5821AB9F-24EA-4410-9F90-38643D4C0188}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C3FDBCF-03DD-4206-A917-3219477A5794}
+	EndGlobalSection
+EndGlobal
