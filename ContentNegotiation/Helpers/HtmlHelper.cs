@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ContentNegotiationDemo;
+namespace ContentNegotiation;
 
 // Copied from https://codereview.stackexchange.com/a/211601
 public static class HtmlHelper

@@ -4,7 +4,7 @@ using ContentNegotiation.Models;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
-namespace ContentNegotiationDemo.Formatters
+namespace ContentNegotiation.Formatters
 {
      public class PlainTextOutputFormatter : TextOutputFormatter
     {

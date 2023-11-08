@@ -1,4 +1,7 @@
-using ContentNegotiationDemo.Formatters;
+using ContentNegotiation.Data;
+using ContentNegotiation.Formatters;
+using Microsoft.EntityFrameworkCore;
+
 namespace ContentNegotiation
 {
     public class Program
@@ -10,10 +13,13 @@ namespace ContentNegotiation
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddControllers(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
-                options.ReturnHttpNotAcceptable = true;
+                options.ReturnHttpNotAcceptable = false;
 
                 options.OutputFormatters.Add(new HtmlOutputFormatter());
                 options.OutputFormatters.Add(new PlainTextOutputFormatter());

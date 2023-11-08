@@ -1,0 +1,45 @@
+﻿<div>
+    <h2>GetData</h2>
+    <label for="formatSelect">Select Data Format:</label>
+    <select id="formatSelect">
+        <option value="application/json">JSON</option>
+        <option value="text/html">HTML</option>
+        <option value="text/plain">Plain Text</option>
+    </select>
+    <button id="getData" class="btn btn-outline-success">GetData</button>
+    <div id="showData">
+        <p id="formatPara"></p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#getData').click(function () {
+            var selectedFormat = $('#formatSelect').val();
+
+            $.ajax({
+                url: '/Student/GetStudentsData',
+                type: 'GET',
+                headers: { "Accept": selectedFormat },
+                success: function (data) {
+                    $("#formatPara").text("");
+
+                    if (selectedFormat === "application/json") {
+
+                        var formattedData = JSON.stringify(data, null, 2);
+                        $("#formatPara").text(formattedData);
+
+                  
+                    } else if (selectedFormat === "text/html") {
+                        
+                        $("#formatPara").text(data);
+                    } else {
+                       
+                        $("#formatPara").text(data);
+                    }
+                }
+            });
+        });
+    });
+</script>

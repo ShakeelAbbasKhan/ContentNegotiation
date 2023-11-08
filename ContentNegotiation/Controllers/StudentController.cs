@@ -1,19 +1,17 @@
-﻿using ContentNegotiation.Models;
+﻿using ContentNegotiation.Data;
+using ContentNegotiation.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContentNegotiation.Controllers
 {
     public class StudentController : Controller
     {
-        private List<Student> students;
+        private ApplicationDbContext _db;
 
-        public StudentController()
+        public StudentController(ApplicationDbContext db)
         {
-            students = new List<Student>
-            {
-                new Student { Id = 1, FirstName = "Shakeel", LastName = "Abbas" },
-                new Student { Id = 2, FirstName = "Bilal", LastName = "Asghar" },
-            };
+
+            _db = db;
         }
         public IActionResult Index()
         {
@@ -22,28 +20,48 @@ namespace ContentNegotiation.Controllers
 
         [HttpGet]
         [ResponseCache(Duration = 60, VaryByHeader = "Accept")]
-        public IActionResult GetStudentsData()
+        public IActionResult GetStudentsList()
         {
+            var students = _db.Students.ToList();
             return Ok(students);
         }
 
         [HttpGet]
-        public IActionResult GetStudents()
+        [ResponseCache(Duration = 60, VaryByHeader = "Accept")]
+        public IActionResult GetStudentsData()
         {
+            var students = _db.Students.ToList();
             var isAjaxRequest = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
 
             if (isAjaxRequest)
             {
-                return PartialView("_GetStudents", students);
-                //_GetStudents   _PartialView
+                return Ok(students);
+                //return PartialView("_GetStudents", students);
             }
             else
             {
                 return View(students);
             }
-
-            return Ok(students);
         }
+
+        [HttpGet]
+        public IActionResult GetStudents()
+        {
+
+            var students = _db.Students.ToList();
+            var isAjaxRequest = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+
+            if (isAjaxRequest)
+            {
+                
+                return PartialView("_GetStudents", students);
+            }
+            else
+            {
+                return View(students);
+            }
+        }
+
 
     }
 }
